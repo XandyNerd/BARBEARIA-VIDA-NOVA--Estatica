@@ -227,6 +227,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Close Dropdown
                 select.classList.remove('open');
+
+                // Trigger Validation
+                if (hiddenInputId === 'barber' || hiddenInputId === 'location') {
+                    checkBarberUnitConflict();
+                }
             });
         });
     });
@@ -264,6 +269,79 @@ document.addEventListener('DOMContentLoaded', function () {
     customAlertOverlay.addEventListener('click', (e) => {
         if (e.target === customAlertOverlay) {
             hideCustomAlert();
+        }
+    });
+
+
+    // Barber-Unit Validation Logic
+    const barberUnits = {
+        'Gustavo': 'Unidade Milionários',
+        'Uri': 'Unidade Milionários',
+        'Alexandre Silva': 'Unidade Flávio Marques Lisboa'
+    };
+
+    const conflictModal = document.getElementById('conflict-modal');
+    const conflictYesBtn = document.getElementById('conflict-yes');
+    const conflictNoBtn = document.getElementById('conflict-no');
+
+    function checkBarberUnitConflict() {
+        const selectedBarber = document.getElementById('barber').value;
+        const selectedLocation = document.getElementById('location').value;
+
+        if (selectedBarber && selectedLocation && selectedBarber !== 'Qualquer barbeiro disponível') {
+            const correctUnit = barberUnits[selectedBarber];
+
+            if (correctUnit && selectedLocation !== correctUnit) {
+                // Show conflict modal
+                conflictModal.classList.remove('hidden');
+                setTimeout(() => {
+                    conflictModal.classList.add('show');
+                }, 10);
+            }
+        }
+    }
+
+    function hideConflictModal() {
+        conflictModal.classList.remove('show');
+        setTimeout(() => {
+            conflictModal.classList.add('hidden');
+        }, 300);
+    }
+
+    conflictYesBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        hideConflictModal();
+    });
+
+    conflictNoBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const selectedBarber = document.getElementById('barber').value;
+        const correctUnit = barberUnits[selectedBarber];
+
+        if (correctUnit) {
+            // Programmatically select the correct unit
+            const locationSelect = document.getElementById('custom-location-select');
+            const locationOptions = locationSelect.querySelectorAll('.option');
+            const locationTriggerText = locationSelect.querySelector('.select-trigger span');
+            const locationInput = document.getElementById('location');
+
+            locationOptions.forEach(opt => {
+                if (opt.dataset.value === correctUnit) {
+                    // Update UI
+                    locationOptions.forEach(o => o.classList.remove('selected'));
+                    opt.classList.add('selected');
+                    locationTriggerText.textContent = opt.textContent;
+                    locationInput.value = correctUnit;
+                }
+            });
+        }
+        hideConflictModal();
+    });
+
+    // Close on click outside box
+    conflictModal.addEventListener('click', (e) => {
+        if (e.target === conflictModal) {
+            hideConflictModal();
         }
     });
 
