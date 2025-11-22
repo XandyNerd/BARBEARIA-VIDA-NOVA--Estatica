@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Horário - Barbearia Vida Nova</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="agendar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Background Video -->
+    <div class="video-background-fixed">
+        <video autoplay muted loop playsinline id="bg-video-fixed">
+            <source src="AgendaVideoFundo.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+        <div class="overlay-fixed"></div>
+    </div>
+
+    <!-- Header / Nav -->
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <a href="index.html" style="display: flex; align-items: center; text-decoration: none;">
+                    <img src="lobobarbearia.jpg" alt="Logo" class="nav-logo-img">
+                    <div class="logo">BARBEARIA VIDA NOVA</div>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Voltar ao Início</a></li>
+            </ul>
+            <div class="hamburger">
+                <a href="index.html" style="color: white;"><i class="fas fa-arrow-left"></i></a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Scheduling Form Section -->
+    <section class="scheduling-page-section">
+        <div class="scheduling-container">
+            <h2>Agende seu <span class="highlight">Horário</span></h2>
+
+            <form id="scheduling-form">
+                <!-- Serviço (Custom Dropdown) -->
+                <div class="form-group">
+                    <label>Serviço</label>
+                    <div class="custom-select" id="custom-service-select">
+                        <div class="select-trigger">
+                            <span id="select-trigger-text">Selecione o serviço</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="select-options">
+                            <div class="optgroup-label">Cabelo</div>
+                            <div class="option" data-value="Corte Masculino">Corte Masculino</div>
+                            <div class="option" data-value="Corte + Barba">Corte + Barba</div>
+                            <div class="option" data-value="Corte + Sobrancelha">Corte + Sobrancelha</div>
+                            <div class="option" data-value="Corte + Barba + Sobrancelha">Corte + Barba + Sobrancelha
+                            </div>
+
+                            <div class="optgroup-label">Barba</div>
+                            <div class="option" data-value="Barba">Barba</div>
+                            <div class="option" data-value="Barba + Pezinho">Barba + Pezinho</div>
+
+                            <div class="optgroup-label">Sobrancelha</div>
+                            <div class="option" data-value="Design Sobrancelha">Design</div>
+
+                            <div class="optgroup-label">Química</div>
+                            <div class="option" data-value="Botox">Botox</div>
+                            <div class="option" data-value="Progressiva">Progressiva</div>
+                            <div class="option" data-value="Corte + Botox">Corte + Botox</div>
+                            <div class="option" data-value="Corte + Progressiva">Corte + Progressiva</div>
+
+                            <div class="option" data-value="Outros">Outros (Especificar)</div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="service">
+                </div>
+
+                <!-- Outros Serviços (Condicional) -->
+                <div class="form-group hidden" id="other-service-container">
+                    <label for="other-service">Qual serviço deseja?</label>
+                    <input type="text" id="other-service" class="form-control" placeholder="Digite o nome do serviço">
+                </div>
+
+                <!-- Barbeiro (Custom Dropdown) -->
+                <div class="form-group">
+                    <label>Barbeiro de preferência</label>
+                    <div class="custom-select" id="custom-barber-select">
+                        <div class="select-trigger">
+                            <span id="barber-trigger-text">Selecione o barbeiro</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="select-options">
+                            <div class="option" data-value="Gustavo">Gustavo (Master Barber)</div>
+                            <div class="option" data-value="Uri">Uri</div>
+                            <div class="option" data-value="Alexandre Silva">Alexandre Silva</div>
+                            <div class="option" data-value="Qualquer barbeiro disponível">Qualquer barbeiro disponível
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="barber">
+                </div>
+
+                <!-- Local (Custom Dropdown) -->
+                <div class="form-group">
+                    <label>Unidade</label>
+                    <div class="custom-select" id="custom-location-select">
+                        <div class="select-trigger">
+                            <span id="location-trigger-text">Selecione a unidade</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="select-options">
+                            <div class="option" data-value="Unidade Milionários">Unidade Milionários</div>
+                            <div class="option" data-value="Unidade Flávio Marques Lisboa">Unidade Flávio Marques Lisboa
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="location">
+                </div>
+
+                <!-- Data -->
+                <div class="form-group">
+                    <label>Data</label>
+                    <div class="calendar-wrapper">
+                        <div class="calendar-header">
+                            <button type="button" id="prev-month"><i class="fas fa-chevron-left"></i></button>
+                            <span id="current-month"></span>
+                            <button type="button" id="next-month"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="calendar-grid" id="calendar-grid">
+                            <!-- Days will be generated by JS -->
+                        </div>
+                    </div>
+                    <input type="hidden" id="selected-date" required>
+                </div>
+
+                <!-- Horário -->
+                <div class="form-group">
+                    <label>Horário</label>
+                    <div class="time-picker-wrapper">
+                        <div class="time-picker-selection-bar"></div>
+                        <ul class="time-picker-list" id="time-picker-list">
+                            <!-- Times will be generated by JS -->
+                        </ul>
+                    </div>
+                    <input type="hidden" id="selected-time" required>
+                </div>
+
+                <!-- Observações -->
+                <div class="form-group">
+                    <label for="observations">Observações (Opcional)</label>
+                    <textarea id="observations" class="form-control"
+                        placeholder="Alguma preferência especial?"></textarea>
+                </div>
+
+                <!-- Botão Enviar -->
+                <button type="submit" class="btn-submit">
+                    <i class="fab fa-whatsapp"></i> Enviar pelo WhatsApp
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">BARBEARIA VIDA NOVA</div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/barbeariavidanova/"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/barbeariavidanova"><i class="fab fa-facebook"></i></a>
+                <a href="https://wa.me/553171944816"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>&copy; 2025 Barbearia Vida Nova. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Custom Alert Modal -->
+    <div id="custom-alert" class="custom-alert-overlay hidden">
+        <div class="custom-alert-box">
+            <div class="alert-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <p id="custom-alert-message">Mensagem aqui</p>
+            <button id="custom-alert-ok" class="btn-alert">OK</button>
+        </div>
+    </div>
+
+    <script src="agendamento.js"></script>
+</body>
+
+</html>
