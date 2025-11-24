@@ -421,7 +421,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <button id="modal-ok-btn" class="btn-hero" style="min-width: 120px;">OK</button>
                         </div>
                     `;
-                    
+
                     servicesModal.style.display = "block";
 
                     // Add listener to the new button
@@ -505,6 +505,7 @@ if (reviewsCarousel) {
     const stopAutoScroll = () => {
         clearInterval(autoScrollInterval);
     };
+    
 
     // Inicia a rotação automática
     startAutoScroll();
@@ -529,4 +530,21 @@ if (reviewsCarousel) {
             }
         }, 150);
     }, { passive: true });
+
+    document.querySelectorAll('.interactive-image-container').forEach(container => {
+    const img1 = container.querySelector('.static-img');
+    const img2 = container.querySelector('.hover-img');
+
+    container.addEventListener('mouseenter', () => {
+        img1.style.opacity = "0";
+        img2.style.opacity = "1";
+    });
+
+    container.addEventListener('mouseleave', () => {
+        img1.style.opacity = "1";
+        img2.style.opacity = "0";
+    });
+});
+
+    
 }
