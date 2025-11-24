@@ -334,7 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // SERVIÇOS PRESTADO E VALORES (CABELO)
+    // SERVIÇOS PRESTADO E VALORES 
     const servicesData = {
         "cabelo": [
             { type: 'header', name: '✅ Serviços Individuais' },
@@ -432,6 +432,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Scroll Animation Logic
+    function initScrollAnimations() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
+
+    initScrollAnimations();
 });
 
 // Lógica do Carrossel de Avaliações
@@ -488,7 +503,7 @@ if (reviewsCarousel) {
     // Retoma a rotação quando o usuário para de interagir
     reviewsCarousel.addEventListener('mouseleave', startAutoScroll);
     reviewsCarousel.addEventListener('touchend', startAutoScroll);
-    
+
     // Opcional: Pausar enquanto estiver fazendo scroll manual
     let isScrolling;
     reviewsCarousel.addEventListener('scroll', () => {

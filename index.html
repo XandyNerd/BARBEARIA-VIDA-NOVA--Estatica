@@ -4,12 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barbearia Vida Nova</title>
+
+    <!-- SEO Local -->
+    <title>Barbearia Vida Nova | Barbearia no Barreiro - Belo Horizonte</title>
+    <meta name="description"
+        content="Barbearia Vida Nova no Barreiro, Belo Horizonte. Corte masculino, barba, sobrancelha, atendimento exclusivo e agendamento online rápido e fácil.">
+    <meta name="keywords"
+        content="barbearia barreiro, barbearia no barreiro bh, barbeiro no barreiro, corte masculino barreiro, barbeiro perto de mim, barbearia vida nova barreiro, corte de cabelo bh barreiro">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="pt-BR">
+    <meta name="author" content="Barbearia Vida Nova">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- SEO Avançado: Dados Estruturados (Google) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Barbershop",
+        "name": "Barbearia Vida Nova",
+        "image": "https://meu-site.com/logo.jpg",
+        "url": "https://seu-site.com",
+        "telephone": "+55 31 7194-4816",
+        "priceRange": "$$",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Rua Amílcar Cabral, 401 - Bairro Milionários",
+            "addressLocality": "Belo Horizonte",
+            "addressRegion": "MG",
+            "postalCode": "30664-350",
+            "addressCountry": "BR"
+        },
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday"
+                ],
+                "opens": "08:00",
+                "closes": "20:00"
+            }
+        ]
+    }
+    </script>
 </head>
 
 <body>
@@ -60,7 +108,7 @@
 
     <!-- Premium Service Section -->
     <section id="premium" class="premium-section">
-        <div class="container">
+        <div class="container reveal">
             <h2>EXPERIÊNCIA <span class="highlight">PREMIUM</span></h2>
 
             <div class="premium-content">
@@ -110,26 +158,18 @@
 
     <!-- Time de barbeiros -->
     <section id="team" class="team-section">
-        <div class="container">
+        <div class="container reveal">
             <h2>NOSSA <span class="highlight">EQUIPE</span></h2>
-            <div class="team-grid">
-                <div class="team-card">
-                    <div class="team-img interactive-video-container">
-                        <img src="gustavobarber.png" alt="Barbeiro 1" class="static-img">
-                        <video src="atendvideo02.mp4" loop playsinline class="hover-video"></video>
-                    </div>
 
-                    <!-- Barbeiro Gustavo -->
-                    <div class="team-info">
-                        <h3>Gustavo</h3>
-                        <span class="role">Master Barber</span>
-                        <div class="details">
-                            <p><strong>Idade:</strong> 25 anos</p>
-                            <p><strong>Exp:</strong> 8 anos</p>
-                        </div>
-                        <p class="description">Especialista em cortes clássicos e barboterapia. Transforma cada
-                            atendimento em uma experiência única.</p>
-                        <!-- 
+
+
+
+
+
+            <div class="team-grid"> <!-- Separa os barbeiros -->
+
+
+                <!-- 
                             COMENTÁRIO IMPORTANTE:
                             Para alterar a unidade pré-selecionada, mude o valor de 'barbearia' na URL abaixo.
                             Os valores devem ser exatamente iguais aos do select em agendar.html:
@@ -137,47 +177,90 @@
                             - "Unidade Flávio Marques Lisboa"
                             Se no futuro houver apenas uma unidade, você pode remover o parâmetro '&barbearia=...' ou ajustar o código para ignorá-lo.
                          -->
-                        <a href="agendar.html?barbeiro=Gustavo&barbearia=Unidade Milionários" class="btn-whatsapp"><i
-                                class="fas fa-calendar-check"></i> Agendar com Gustavo</a>
-                    </div>
-                </div>
+
+
+
+                <!-- Barbeiro Uri -->
                 <div class="team-card">
                     <div class="team-img">
-                        <img src="barber02.jpg" alt="Barbeiro 2">
+                        <img src="Urifoto02PB.jpg.png" alt="Barbeiro 2">
                     </div>
                     <div class="team-info">
 
-                        <!-- Barbeiro Uri -->
+
 
                         <h3>Uri</h3>
-                        <span class="role">Barber</span>
+                        <span class="role">Master Barber</span>
                         <div class="details">
                             <p><strong>Idade:</strong> 28 anos</p>
                             <p><strong>Exp:</strong> 12 anos</p>
                         </div>
+                        <div>
+                            <p><strong>Unidade:</strong> Milionários</p>
+                        </div>
+
                         <p class="description">Focado em cortes modernos e degradês perfeitos. Sempre antenado nas novas
                             tendências.</p>
-                        <a href="agendar.html?barbeiro=Uri&barbearia=Unidade Milionários" class="btn-whatsapp"><i
+                        <a href="agendar.html?barbeiro=Uri&barbearia=Unidade Milionários" class="btn-agendar"><i
                                 class="fas fa-calendar-check"></i> Agendar com Uri</a>
                     </div>
                 </div>
+                <!-- Barbeiro Uri -->
+
+
+                <!-- Barbeiro Gustavo -->
                 <div class="team-card">
-                    <div class="team-img">
-                        <img src="Barber03.jpg" alt="Barbeiro 3">
+                    <div class="team-img interactive-video-container">
+                        <img src="GustavofotoPB.jpg.png" alt="Barbeiro 1" class="static-img">
+                        <video src="AtendVideo02.mp4" loop muted playsinline class="hover-video"></video>
                     </div>
 
-                    <!-- Barbeiro Alexandre -->
+
                     <div class="team-info">
-                        <h3>Alexandre Silva</h3>
+                        <h3>Gustavo</h3>
                         <span class="role">Barber</span>
                         <div class="details">
-                            <p><strong>Idade:</strong> 22 anos</p>
-                            <p><strong>Exp:</strong> Iniciante</p>
+                            <p><strong>Idade:</strong> 25 anos</p>
+                            <p><strong>Exp:</strong> 8 anos</p>
                         </div>
+                        <p class="description">Especialista em cortes clássicos e barboterapia. Transforma cada
+                            atendimento em uma experiência única.
+                        <p style="color: #0f0f0f"> .</p>
+                        <!-- centralizar o botão! com os outros perfis, por isso do br --></p>
+
+                        <a href="agendar.html?barbeiro=Gustavo&barbearia=Unidade Milionários" class="btn-agendar"><i
+                                class="fas fa-calendar-check"></i> Agendar com Gustavo</a>
+                    </div>
+                </div>
+                <!-- Barbeiro Gustavo -->
+
+
+                <!-- Barbeiro Marcelo -->
+
+                <div class="team-card">
+                    <div class="team-img">
+                        <img src="marcelobarber02.jpg" alt="Barbeiro 3">
+                    </div>
+
+
+                    <div class="team-info">
+                        <h3>Marcelo Ferreira Silva</h3>
+                        <span class="role">Barber</span>
+                        <div class="details">
+                            <p><strong>Idade:</strong> 24 anos</p>
+                            <p><strong>Exp:</strong> 6 anos</p>
+                        </div>
+
+                        <div>
+                            <a href="https://maps.app.goo.gl/VjWnyrXT4sgaddGQ8"><strong>Unidade:</strong> Flávio Marques
+                                Lisboa</a>
+                        </div>
+
+
                         <p class="description">Talento nato para desenhos e freestyle. Traz criatividade e estilo para
                             cada corte.<br><!-- centralizar o botão! com os outros perfis, por isso do br --><br></p>
-                        <a href="agendar.html?barbeiro=Alexandre Silva&barbearia=Unidade Flávio Marques Lisboa"
-                            class="btn-whatsapp"><i class="fas fa-calendar-check"></i> Agendar com Alexandre</a>
+                        <a href="agendar.html?barbeiro=Marcelo&barbearia=Unidade Flávio Marques Lisboa"
+                            class="btn-agendar"><i class="fas fa-calendar-check"></i> Agendar com Marcelo</a>
                     </div>
                 </div>
             </div>
@@ -186,7 +269,7 @@
 
     <!-- Localização -->
     <section id="units" class="units-section">
-        <div class="container">
+        <div class="container reveal">
             <h2>NOSSAS <span class="highlight">UNIDADES</span></h2>
             <p class="units-subtitle">A barbearia nº1 do Barreiro</p>
 
@@ -228,7 +311,7 @@
 
     <!-- Serviços -->
     <section id="services" class="services-section">
-        <div class="container">
+        <div class="container reveal">
             <h2>NOSSOS <span class="highlight">SERVIÇOS</span></h2>
             <div class="services-grid">
                 <div class="service-card">
@@ -276,7 +359,7 @@
 
     <!-- Horarios de funcionamento-->
     <section id="hours" class="hours-section">
-        <div class="container">
+        <div class="container reveal">
             <div class="hours-header">
                 <i class="fas fa-cut hours-icon"></i>
                 <h2>HORÁRIOS DE <span class="highlight">FUNCIONAMENTO</span></h2>
@@ -315,7 +398,7 @@
 
     <!-- Message & Before/After Section -->
     <section id="about" class="about-section">
-        <div class="container">
+        <div class="container reveal">
             <div class="about-text">
                 <h2>TRANSFORME SEU <span class="highlight">VISUAL</span></h2>
                 <p>"A excelência não é um ato, mas um hábito. Aqui, cuidamos de cada detalhe para que você saia com a
@@ -382,7 +465,7 @@
     <!-- Avaliações -->
     <!-- tirar print das umas 10 a 20 avaliações do google e colocar dentro de balões 3d e fica anternando entre si, melhor que fazer a ligação do google com o site -->
     <section id="reviews" class="reviews-section">
-        <div class="container">
+        <div class="container reveal">
             <h2>O QUE DIZEM NOSSos <span class="highlight">CLIENTES</span></h2>
 
             <!-- Rating Summary -->
@@ -632,28 +715,13 @@
                     <span class="review-time">2 meses atrás</span>
                 </div>
 
-                <!-- Generated Review 10 -->
-                <div class="review-card">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/men/90.jpg" alt="Thiago Costa"
-                            class="profile-photo">
-                        <div class="review-info">
-                            <h4>Thiago Costa</h4>
-                            <div class="stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
+
     </section>
 
     <!-- Scheduling Section -->
     <section id="contact" class="scheduling-section">
         <div class="overlay-scheduling"></div>
-        <div class="scheduling-content">
+        <div class="scheduling-content reveal">
             <h2>AGENDE SEU <span class="highlight">HORÁRIO</span></h2>
             <p>Não perca tempo. Garanta seu visual com os melhores profissionais.</p>
             <a href="agendar.html" class="btn-hero btn-scheduling">AGENDAR AGORA</a>
@@ -716,11 +784,12 @@
                                 <div class="container bottom-content">
                                     <p>&copy; 2025 Barbearia Vida Nova. Todos os direitos reservados.</p>
                                     <p class="developer-credit">
-                                        Desenvolvido por <a href="#" title="Portfólio em breve">Alexandre Silva
+                                        Desenvolvido por <a href="https://www.instagram.com/alexandresilva_031/"
+                                            title="Portfólio em breve">Alexandre Silva
                                             Ferreira</a>
-                                    </p>
+                                        < </p>
                                 </div>
-                            </div>
+                            </div>>
     </footer>
 
     <!-- Video Modal -->

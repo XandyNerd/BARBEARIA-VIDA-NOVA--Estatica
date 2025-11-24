@@ -47,8 +47,12 @@ document.addEventListener('DOMContentLoaded', function () {
             const currentDayDate = new Date(year, month, i);
             const dayOfWeek = currentDayDate.getDay();
 
-            // Disable Sundays (0) and Mondays (1)
-            if (dayOfWeek === 0 || dayOfWeek === 1) {
+            // Normalize today for comparison
+            const todayCheck = new Date();
+            todayCheck.setHours(0, 0, 0, 0);
+
+            // Disable past dates, Sundays (0), and Mondays (1)
+            if (currentDayDate < todayCheck || dayOfWeek === 0 || dayOfWeek === 1) {
                 dayElement.classList.add('disabled');
             } else {
                 dayElement.addEventListener('click', () => selectDate(currentDayDate, dayElement));
@@ -72,9 +76,57 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function isDomingoOuSegunda(date) {
+        const day = date.getDay();
+        return day === 0 || day === 1; // 0 = domingo, 1 = segunda
+    }
+
+    function mostrarHorarios(visible) {
+        const horariosWrapper = document.querySelector('.time-picker-wrapper');
+        if (!horariosWrapper) return;
+
+        const formGroup = horariosWrapper.closest('.form-group');
+        if (formGroup) {
+            formGroup.style.display = visible ? "block" : "none";
+        }
+    }
+
+    function atualizarHorariosPassados(date) {
+        const agora = new Date();
+        const isToday = date.toDateString() === agora.toDateString();
+        const itens = document.querySelectorAll('.time-picker-item');
+
+        itens.forEach(item => {
+            const horario = item.textContent.trim(); // ex: "19:40"
+            const [h, m] = horario.split(':').map(Number);
+            const horarioDate = new Date();
+
+            horarioDate.setHours(h, m, 0, 0);
+
+            // reset
+            item.classList.remove('disabled');
+
+            if (isToday && horarioDate < agora) {
+                item.classList.add('disabled');
+                item.classList.remove('selected');
+                if (item.classList.contains('active')) {
+                    item.classList.remove('active');
+                    document.getElementById('selected-time').value = '';
+                }
+            }
+        });
+    }
+
     function selectDate(date, element) {
         selectedDate = date;
         selectedDateInput.value = formatDate(date);
+
+        if (isDomingoOuSegunda(date)) {
+            mostrarHorarios(false);
+        } else {
+            mostrarHorarios(true);
+            atualizarHorariosPassados(date);
+        }
 
         // Update UI
         document.querySelectorAll('.calendar-day').forEach(el => el.classList.remove('selected'));
@@ -162,8 +214,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (closestItem) {
             document.querySelectorAll('.time-picker-item').forEach(i => i.classList.remove('active'));
-            closestItem.classList.add('active');
-            selectedTimeInput.value = closestItem.dataset.time;
+
+            if (!closestItem.classList.contains('disabled')) {
+                closestItem.classList.add('active');
+                selectedTimeInput.value = closestItem.dataset.time;
+            } else {
+                selectedTimeInput.value = '';
+            }
         }
     }
 
@@ -228,8 +285,28 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Close Dropdown
                 select.classList.remove('open');
 
-                // Trigger Validation
-                if (hiddenInputId === 'barber' || hiddenInputId === 'location') {
+                // Trigger Validation or Auto-Select
+                if (hiddenInputId === 'barber') {
+                    // Auto-select unit logic
+                    if (value !== 'Qualquer barbeiro disponível' && barberUnits[value]) {
+                        const correctUnit = barberUnits[value];
+                        const locationSelect = document.getElementById('custom-location-select');
+                        const locationOptions = locationSelect.querySelectorAll('.option');
+                        const locationTriggerText = locationSelect.querySelector('.select-trigger span');
+                        const locationInput = document.getElementById('location');
+
+                        locationOptions.forEach(opt => {
+                            if (opt.dataset.value === correctUnit) {
+                                // Update UI
+                                locationOptions.forEach(o => o.classList.remove('selected'));
+                                opt.classList.add('selected');
+                                locationTriggerText.textContent = opt.textContent;
+                                locationInput.value = correctUnit;
+                            }
+                        });
+                    }
+                    checkBarberUnitConflict();
+                } else if (hiddenInputId === 'location') {
                     checkBarberUnitConflict();
                 }
             });
@@ -273,11 +350,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    // Barber-Unit Validation Logic
+    // Barbeiro unidade 
     const barberUnits = {
         'Gustavo': 'Unidade Milionários',
         'Uri': 'Unidade Milionários',
-        'Alexandre Silva': 'Unidade Flávio Marques Lisboa'
+        'Marcelo': 'Unidade Flávio Marques Lisboa'
     };
 
     const conflictModal = document.getElementById('conflict-modal');
@@ -443,4 +520,50 @@ document.addEventListener('DOMContentLoaded', function () {
             serviceOption.click();
         }
     }
+    function selecionarDataAtualAutomaticamente() {
+        const hoje = new Date();
+
+        if (isDomingoOuSegunda(hoje)) {
+            // Se hoje é domingo/segunda → não selecionar nada automaticamente
+            return;
+        }
+
+        // Encontra o botão do dia atual no calendário
+        const dia = hoje.getDate();
+        const botoesDias = document.querySelectorAll('.calendar-day');
+
+        botoesDias.forEach(btn => {
+            if (Number(btn.textContent.trim()) === dia && !btn.classList.contains('disabled')) {
+                btn.click(); // simula o clique automático
+            }
+        });
+    }
+
+    // Integrar tudo ao clique do usuário no calendário (Delegation already handled by selectDate)
+    // Inicialização correta ao carregar a página
+
+    const hoje = new Date();
+
+    if (isDomingoOuSegunda(hoje)) {
+        // Domingo / segunda → esconder horários
+        mostrarHorarios(false);
+    } else {
+        // Terça a sábado → selecionar automaticamente o dia atual
+        selecionarDataAtualAutomaticamente();
+    }
+
+    // Scroll Animation Logic
+    function initScrollAnimations() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
+
+    initScrollAnimations();
 });

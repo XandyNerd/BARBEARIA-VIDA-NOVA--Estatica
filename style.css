@@ -1488,11 +1488,10 @@ header {
     margin-bottom: 1.5rem;
 }
 
-.btn-whatsapp {
+.btn-agendar {
     display: inline-block;
     padding: 0.8rem 1.5rem;
-    background-color: #25D366;
-    /* WhatsApp Green */
+    background-color: #f4c542;
     color: #fff;
     border-radius: 4px;
     font-weight: 600;
@@ -1503,12 +1502,12 @@ header {
     text-align: center;
 }
 
-.btn-whatsapp:hover {
-    background-color: #128C7E;
+.btn-agendar:hover {
+    background-color: #0f0f0f;
     transform: translateY(-2px);
 }
 
-.btn-whatsapp i {
+.btn-agendar i {
     margin-right: 8px;
     font-size: 1.1rem;
 }
@@ -2052,4 +2051,16 @@ footer p {
         flex-direction: column;
         text-align: center;
     }
+}
+
+/* Scroll Animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }

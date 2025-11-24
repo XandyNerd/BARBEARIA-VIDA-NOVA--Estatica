@@ -283,6 +283,7 @@ textarea.form-control {
 .calendar-day.disabled {
     color: rgba(255, 255, 255, 0.2);
     cursor: not-allowed;
+    pointer-events: none;
 }
 
 .calendar-day.today {
@@ -350,6 +351,13 @@ textarea.form-control {
     font-size: 1.1rem;
 }
 
+/* Disabled Time Style */
+.time-picker-item.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
 /* Padding to allow first and last items to be centered */
 .time-picker-list::before,
 .time-picker-list::after {
@@ -363,8 +371,8 @@ textarea.form-control {
 .btn-submit {
     width: 100%;
     padding: 1rem;
-    background-color: #25D366;
-    /* WhatsApp Green */
+    background-color: #d4af37;
+
     color: #fff;
     border: none;
     border-radius: 6px;
@@ -380,7 +388,7 @@ textarea.form-control {
 }
 
 .btn-submit:hover {
-    background-color: #128C7E;
+    background-color: #0f0f0f;
     transform: translateY(-2px);
 }
 
@@ -471,4 +479,16 @@ textarea.form-control {
     color: #000;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Scroll Animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
